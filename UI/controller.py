@@ -14,7 +14,16 @@ class Controller:
         self._mese = 0
 
     def handle_umidita_media(self, e):
-        pass
+        mese = self._view.dd_mese.value
+        self._view.lst_result.controls.clear()
+        if mese is None:
+            self._view.lst_result.controls.append(ft.Text("Non hai selezionato il mese"))
+            self._view.update_page()
+            return
+        lista_misure = self._model.get_misure(mese)
+        for l in lista_misure:
+            self._view.lst_result.controls.append(ft.Text(f"{l.Localita}: {l.Umidita}"))
+        self._view.update_page()
 
 
 
